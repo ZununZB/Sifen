@@ -1,0 +1,4 @@
+Sifen-Libre es una extensión nativa para LibreOffice Writer que permite firmar
+digitalmente documentos oficiales y oficios usando los archivos .cer y .key de
+la e.firma, sin necesidad de licencias ofimáticas privativas ni de plataformas
+web de terceros. Distribución gratuita y de código abierto.

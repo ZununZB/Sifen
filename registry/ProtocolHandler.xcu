@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Registra nuestro componente como el manejador del protocolo de URL
+  "com.sifenlibre.writer.firma:*". Sin esto, Addons.xcu agrega la entrada
+  de menú pero LibreOffice no sabe a quién entregarle el dispatch (se
+  descubrió al probar el flujo end-to-end con una instancia real de
+  LibreOffice: el dispatch no llegaba a nuestro código).
+-->
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     oor:name="ProtocolHandler" oor:package="org.openoffice.Office">
+  <node oor:name="HandlerSet">
+    <node oor:name="com.sifenlibre.writer.firma.SignDocumentJob" oor:op="replace">
+      <prop oor:name="Protocols" oor:type="oor:string-list">
+        <value>com.sifenlibre.writer.firma:*</value>
+      </prop>
+    </node>
+  </node>
+</oor:component-data>

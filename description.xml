@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+  <identifier value="com.sifenlibre.writer.firma"/>
+  <version value="0.1.0"/>
+  <display-name>
+    <name lang="es">Sifen-Libre: Firma Digital para LibreOffice Writer</name>
+    <name lang="en">Sifen-Libre: Digital Signature for LibreOffice Writer</name>
+  </display-name>
+  <platform value="all"/>
+  <publisher>
+    <name xlink:href="https://github.com/" lang="es">Equipo Sifen-Libre - UACJ</name>
+  </publisher>
+  <extension-description>
+    <src lang="es" xlink:href="docs/descripcion.txt"/>
+  </extension-description>
+</description>

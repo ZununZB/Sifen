@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Registro del punto de entrada de la extensión en el menú de LibreOffice Writer.
+  Agrega "Firmar documento..." dentro del menú Archivo, replicando el flujo de
+  Word (Actividad A: análisis de requisitos y flujo original de Word).
+  La lógica real del diálogo se implementará en la actividad E/H (interfaz +
+  integración con la lógica criptográfica); por ahora solo queda registrado el
+  punto de entrada.
+-->
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     oor:name="Addons" oor:package="org.openoffice.Office">
+  <node oor:name="AddonUI">
+    <node oor:name="OfficeMenuBar">
+      <node oor:name="com.sifenlibre.writer.firma.menu" oor:op="replace">
+        <node oor:name="m1" oor:op="replace">
+          <prop oor:name="Title" oor:type="xs:string">
+            <value xml:lang="es">Firmar documento con e.firma...</value>
+          </prop>
+          <prop oor:name="URL" oor:type="xs:string">
+            <value>com.sifenlibre.writer.firma:SignDocument</value>
+          </prop>
+          <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
+          <prop oor:name="ImageIdentifier" oor:type="xs:string"><value/></prop>
+          <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.text.TextDocument</value></prop>
+        </node>
+      </node>
+    </node>
+  </node>
+</oor:component-data>

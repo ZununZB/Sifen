@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+*.oxt
+.venv/
+venv/
+*.egg-info/
+
+# Nunca versionar certificados, llaves privadas o contraseñas reales
+*.cer
+*.key
+*.p12
+*.pfx
+!tests/fixtures/README.md
