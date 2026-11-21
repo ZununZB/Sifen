@@ -1,10 +1,8 @@
 # Sifen-Libre
 
-Extensión nativa (.oxt) para **LibreOffice Writer** que permite firmar digitalmente
-documentos oficiales y oficios usando archivos de e.firma (**.cer** / **.key** + contraseña),
-sin depender de licencias ofimáticas privativas ni de plataformas web de terceros.
+Extensión (.oxt) para LibreOffice Writer que firma digitalmente documentos con los archivos de la e.firma (`.cer`, `.key` y contraseña).
 
-Proyecto de la materia *Innovación Tecnológica* (Ingeniería de Software, UACJ).
+Proyecto de la materia Innovación Tecnológica (Ingeniería de Software, UACJ).
 
 ## Equipo
 
@@ -14,47 +12,40 @@ Proyecto de la materia *Innovación Tecnológica* (Ingeniería de Software, UACJ
 - Jesús Alejandro Cardoza Reza – 216024
 - Ricardo Zunun Puente – 217024
 
-## Estado del proyecto
+## Cómo funciona
 
-Ver [`PROGRESS.md`](PROGRESS.md) para el avance contra la ruta crítica (PERT) y el
-detalle de qué cubre cada módulo.
+1. En Writer, abre el menú **SIFEN-Libre → Firmar Documento Digitalmente**.
+2. Selecciona tu certificado `.cer`.
+3. Selecciona tu llave privada `.key`.
+4. Escribe la contraseña de la llave.
+5. La extensión valida que la llave corresponda al certificado, firma el texto del documento con RSA-SHA256 y agrega al final un recuadro con los datos de la firma: firmante, RFC, número de serie, fecha, digest, cadena original y sello digital.
 
-## Estructura
+La contraseña se borra de la memoria al terminar.
 
-```
-sifen-libre/
-├── description.xml        # Metadatos de la extensión (.oxt)
-├── META-INF/manifest.xml  # Manifiesto requerido por el administrador de extensiones
-├── registry/Addons.xcu    # Registro del menú/botón dentro de Writer
-├── src/
-│   ├── core/               # Punto de entrada UNO de la extensión
-│   ├── crypto/             # Carga/validación de certificados y motor de firma
-│   └── ui/                 # Diálogo de firma (selector de .cer/.key + contraseña)
-├── docs/                   # Investigación y diseño de arquitectura
-├── scripts/                # Utilidades de desarrollo (pruebas de conexión UNO, build del .oxt)
-└── tests/                  # Pruebas unitarias (pytest)
-```
+## Requisitos
 
-## Requisitos de desarrollo
+- LibreOffice con soporte para Python.
+- OpenSSL. En Windows sirve el que viene con Git for Windows o una instalación de OpenSSL.
 
-```bash
-pip install -r requirements.txt
-```
+## Instalación
 
-Para probar la conexión con la API UNO se necesita LibreOffice instalado localmente
-(ver `scripts/test_conexion_uno.py`).
+En LibreOffice: **Herramientas → Administrador de extensiones → Añadir** y elige el `.oxt`. Reinicia LibreOffice.
 
-## Pruebas
+`sifen_libre_v1.oxt` es el paquete que corresponde al código actual. Los archivos `sifen_v2.oxt` a `sifen_v5.oxt` son versiones de prueba anteriores.
 
-```bash
-pytest tests/ -v
-```
+## Archivos
 
-## Empaquetado
+| Archivo | Para qué es |
+|---|---|
+| `sifen_main.py` | Código de la extensión: lectura del certificado, validación de la llave, firma y sello visual |
+| `Addons.xcu` | Agrega el menú SIFEN-Libre en Writer |
+| `description.xml` | Nombre, versión e identificador de la extensión |
+| `META-INF/manifest.xml` | Lista los archivos que LibreOffice carga del `.oxt` |
+
+## Generar el .oxt
+
+Desde la carpeta del repo:
 
 ```bash
-bash scripts/build_oxt.sh
+zip -r sifen_libre.oxt description.xml Addons.xcu sifen_main.py META-INF/manifest.xml
 ```
-
-Genera `dist/sifen-libre.oxt`, instalable desde el Administrador de Extensiones de
-LibreOffice (Herramientas → Administrar extensiones → Agregar).
